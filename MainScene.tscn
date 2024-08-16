@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bndxo011xuocj"]
+
+[ext_resource type="Script" path="res://IKProg.gd" id="1_0odxs"]
+[ext_resource type="Texture2D" uid="uid://j11gatktil4v" path="res://icon.svg" id="1_qcfug"]
+[ext_resource type="Script" path="res://FeetControl.gd" id="3_m46qy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f54u2"]
+size = Vector2(64, 64)
+
+[node name="MainScene" type="Node2D"]
+
+[node name="Limb" type="Node2D" parent="."]
+position = Vector2(307, 34)
+script = ExtResource("1_0odxs")
+
+[node name="Base" type="Sprite2D" parent="Limb"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_qcfug")
+
+[node name="Knee" type="Sprite2D" parent="Limb"]
+position = Vector2(0, 219)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_qcfug")
+
+[node name="Feet" type="Area2D" parent="Limb"]
+position = Vector2(0, 432)
+script = ExtResource("3_m46qy")
+
+[node name="Feet" type="Sprite2D" parent="Limb/Feet"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_qcfug")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Limb/Feet"]
+shape = SubResource("RectangleShape2D_f54u2")
+
+[connection signal="mouse_entered" from="Limb/Feet" to="Limb/Feet" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Limb/Feet" to="Limb/Feet" method="_on_mouse_exited"]
